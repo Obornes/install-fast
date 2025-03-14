@@ -7,7 +7,7 @@ on:
 
 env:
   DOCKER_CLI_EXPERIMENTAL: enabled
-  FAST_VERSION: ""  # Change this to the desired version or latest
+  FAST_VERSION: "latest"  # Change this to the desired version or leave it empty or with word "latest" for the latest version
 
 jobs:
   build:
