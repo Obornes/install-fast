@@ -11,8 +11,10 @@ RUN apt-get update && apt-get install -y \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Download and install Fast using your GitHub-hosted script
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Obornes/install-fast/main/install_fast_linux.sh)" 0.5.5-beta
+# Download the script and then execute it with the version argument
+RUN curl -fsSL -o /usr/local/bin/install_fast_linux.sh https://raw.githubusercontent.com/Obornes/install-fast/main/install_fast_linux.sh \
+    && chmod +x /usr/local/bin/install_fast_linux.sh \
+    && /bin/bash /usr/local/bin/install_fast_linux.sh 0.5.6-beta
 
 # Verify installation
 RUN fast self:version
