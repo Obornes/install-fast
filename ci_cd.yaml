@@ -1,0 +1,32 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+env:
+  DOCKER_CLI_EXPERIMENTAL: enabled
+  FAST_VERSION: "0.5.6-beta"  # Change this to the desired version or latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - uses: actions/checkout@v4
+
+      - name: Download and Install Fast (Specific Version)
+        run: |
+          curl -fsSL -o /usr/local/bin/install_fast_linux.sh https://raw.githubusercontent.com/Obornes/install-fast/main/install_fast_linux.sh
+          chmod +x /usr/local/bin/install_fast_linux.sh
+          /bin/bash /usr/local/bin/install_fast_linux.sh $FAST_VERSION
+
+      - name: Verify Fast Installation
+        run: fast self:version  # Should print 0.5.5-beta
+
