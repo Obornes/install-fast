@@ -19,8 +19,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Download and Install Fast (Specific Version)
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/Obornes/install-fast/main/install_fast_linux.sh | bash -s $FAST_VERSION
+        run: curl -fsSL https://raw.githubusercontent.com/Obornes/install-fast/main/install_fast_linux.sh | bash -s $FAST_VERSION
 
       - name: Verify Fast Installation
         run: fast self:version  # Should print 0.5.5-beta
